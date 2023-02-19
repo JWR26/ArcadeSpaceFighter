@@ -1,8 +1,12 @@
 extends VBoxContainer
 
+const COUNTER_INTERVAL = 0.02
+const COUNTER_STEP = 10
+
 var final_score: int = 0
 var displayed_score: int = 0
 var new_high_score: bool = false
+var counter_elapsed: float = 0
 
 
 # Called when the node enters the scene tree for the first time.
@@ -17,9 +21,13 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	# increase the displayed score old school counter style
-	if (displayed_score < final_score):
+	counter_elapsed += delta
+	while displayed_score < final_score and counter_elapsed >= COUNTER_INTERVAL:
+		counter_elapsed -= COUNTER_INTERVAL
+
+		# increase the displayed score old school counter style
 		displayed_score += 10
+
 		$FinalScore/Score.text = str(displayed_score)
 
 
