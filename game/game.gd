@@ -4,6 +4,7 @@ export(PackedScene) var enemy
 
 onready var entity_spawn_point = $EntityPath/EntitySpawnPoint
 
+
 func _ready() -> void:
 	EventBus.connect("game_over", self, "_on_game_over")
 

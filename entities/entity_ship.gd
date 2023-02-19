@@ -6,12 +6,10 @@ extends Entity2D
 
 # --- Siganls ---
 
-
 # --- ENUMS ---
 
-
 # --- Constants ---
-const MAX_HP:int = 10
+const MAX_HP: int = 10
 const BOUNCING_PROJECTILE_COLOR: Color = Color(1.0, 0.52, 0.15, 1)
 const SPRAY: float = 0.1
 # --- Exported Variables ---
@@ -20,15 +18,11 @@ export var projectile_radius: int = 12
 var bouncing_bullets_active: bool = false setget set_bouncing_bullets_active
 # --- Private Variables ---
 
-
 # --- Onready Variables ---
-
 
 # --- Virtual _init method ---
 
-
 # --- Virtual _ready method ---
-
 
 # --- Virtual methods ---
 
@@ -46,7 +40,9 @@ func apply_bouncing_bullet_powerup() -> void:
 
 
 # --- Private methods ---
-func _fire_projectile(pos: Vector2, dir: Vector2, exception: Node, container: Node, color: Color = Color.white) -> void:
+func _fire_projectile(
+	pos: Vector2, dir: Vector2, exception: Node, container: Node, color: Color = Color.white
+) -> void:
 	var projectile_color: Color = BOUNCING_PROJECTILE_COLOR if bouncing_bullets_active else color
 	var p: Projectile2D = Projectile2D.new(projectile_radius, exception, projectile_color)
 	p.set_position(pos)

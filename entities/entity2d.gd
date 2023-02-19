@@ -24,6 +24,7 @@ var hp: int = 10
 
 # --- Virtual methods ---
 
+
 # --- Public methods ---
 # Apply damage to the entity. DO NOT OVERRIDE.
 func take_damage(value: int = 1) -> void:
@@ -34,9 +35,11 @@ func take_damage(value: int = 1) -> void:
 	if hp <= 0:
 		entity_destroyed()
 
+
 # Function for specific behaviour on taking damage. Overridable.
 func damage_taken() -> void:
 	pass
+
 
 # Function to hold specific behaviour for entity destruction. Overridable.
 func entity_destroyed() -> void:

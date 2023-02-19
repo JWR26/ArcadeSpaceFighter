@@ -30,9 +30,8 @@ func new_high_score() -> void:
 
 func _on_LineEdit_text_entered(new_text: String) -> void:
 	$MarginContainer/LineEdit.set_editable(false)
-	
+
 	if new_high_score:
 		HighScoreManager.add_high_score(final_score, new_text)
-	
-	SceneChanger.change_scene("res://menu/main_menu.tscn",0)
 
+	SceneChanger.change_scene("res://menu/main_menu.tscn", 0)
