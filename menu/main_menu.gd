@@ -9,15 +9,17 @@ func _ready() -> void:
 	play_button.grab_focus()
 
 
-func _input(event: InputEvent) -> void:
+func _input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("fire_laser"):
 		SceneChanger.change_scene("res://game/game.tscn")
+		# gdlint: disable=private-method-call
 		MusicManager._change_track_to("Game", 3.0)
 
 
 func _on_Play_pressed() -> void:
 	_disable_buttons()
 	SceneChanger.change_scene("res://game/game.tscn")
+	# gdlint: disable=private-method-call
 	MusicManager._change_track_to("Game", 3.0)
 
 

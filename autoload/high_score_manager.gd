@@ -42,13 +42,14 @@ func is_new_high_score(score: int = 0) -> bool:
 	# can have 10 high scores so if lower than defaults add
 	if high_scores.size() < MAX_HIGH_SCORE_COUNT:
 		return true
-	
+
 	return false
+
 
 # add a high score to the list
 func add_high_score(score: int = 0, by: String = "Anon") -> void:
 	var new_high_score: Array = [score, by]
-	
+
 	high_scores.append(new_high_score)
 	high_scores.sort_custom(self, "sort_by_score")
 	# keep high score size same.
@@ -67,11 +68,13 @@ func get_number_of_high_scores() -> int:
 	return high_scores.size()
 
 
-# custom sort for the high score list. 
+# Custom sort for the high score list.
+# Sorts the scores numerically in the event of a tie, scores are sorted alphabetically by name.
 static func sort_by_score(a, b) -> bool:
-	#Sorts the scores numerically in the event of a tie, scores are sorted alphabetically by name.
 	if a[0] > b[0]:
 		return true
-	elif a[0] == b[0]:
+
+	if a[0] == b[0]:
 		return a[1] < b[1]
-	return false;
+
+	return false

@@ -5,6 +5,7 @@ var max_index: int = 0
 
 onready var top_score_label = $MarginContainer2/TopScore
 
+
 func _ready() -> void:
 	var top_score = HighScoreManager.get_top_score()
 	max_index = HighScoreManager.get_number_of_high_scores() - 1
@@ -21,8 +22,12 @@ func update_display() -> void:
 			count = 0
 			$Timer.start(6.0)
 			return
-		labels[i] as HighScoreLabel
-		labels[i].display_specific_score(index+1, HighScoreManager.high_scores[index][1], HighScoreManager.high_scores[index][0])
+		# See HighScoreLabel
+		labels[i].display_specific_score(
+			index + 1,
+			HighScoreManager.high_scores[index][1],
+			HighScoreManager.high_scores[index][0]
+		)
 	count += 1
 	$Timer.start(6.0)
 

@@ -6,9 +6,7 @@ extends RigidBody2D
 
 # --- Siganls ---
 
-
 # --- ENUMS ---
-
 
 # --- Constants ---
 const IMPULSE_FACTOR = 1000
@@ -19,9 +17,7 @@ const NUMBER_OF_CONTACTS = 1
 const SPARKS = preload("res://effects/bullet_sparks.tscn")
 # --- Exported Variables ---
 
-
 # --- Public Variables ---
-
 
 # --- Private Variables ---
 var direction = Vector2.UP setget set_direction
@@ -44,11 +40,11 @@ func _init(radius: int = MAX_RADIUS, parent: Node = self, color: Color = Color.w
 	# enable collisions
 	add_collisions(parent)
 
+
 # --- Virtual _ready method ---
 func _ready() -> void:
 	var start_impulse: Vector2 = direction * IMPULSE_FACTOR
 	apply_central_impulse(start_impulse)
-	
 
 
 # --- Virtual methods ---
@@ -59,11 +55,12 @@ func _integrate_forces(state):
 		if state.get_contact_collider_object(i).has_method("take_damage"):
 			Sparks.emit_from_collision(state, i, SPARKS, get_parent())
 
+
 # --- Public methods ---
 # defines the physics properites of the projectile
 func set_physics_properties() -> void:
-	var physics_material = preload("res://entities/projectile_physics_material.tres")
-	set_physics_material_override(physics_material)
+	var PhysicsMaterial = preload("res://entities/projectile_physics_material.tres")
+	set_physics_material_override(PhysicsMaterial)
 	set_mass(PROJECTILE_MASS)
 	continuous_cd = RigidBody2D.CCD_MODE_CAST_SHAPE
 	set_max_contacts_reported(NUMBER_OF_CONTACTS)
@@ -97,7 +94,7 @@ func set_collision_shape(radius: int) -> void:
 
 func add_collisions(parent: Node) -> void:
 	set_contact_monitor(true)
-	set_max_contacts_reported(1) 
+	set_max_contacts_reported(1)
 	if parent:
 		add_collision_exception_with(parent)
 	#connect signals
@@ -119,7 +116,7 @@ func _on_body_entered(body: Node) -> void:
 		body.take_damage()
 		queue_free()
 	# for bouncing bullets, reduce the bounce count and delete when depleted.
-	bounce_number -= 1 
+	bounce_number -= 1
 	if bounce_number < 0:
 		queue_free()
 
@@ -139,4 +136,3 @@ func set_can_bounce(value: bool = false) -> void:
 		set_collision_layer_bit(1, true)
 		set_collision_mask_bit(1, true)
 		bounce_number = 3
- 

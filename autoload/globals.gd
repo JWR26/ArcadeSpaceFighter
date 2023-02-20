@@ -1,26 +1,21 @@
 # --- Class ---
 
-
 # --- Extends ---
 extends Node
 
 # --- Siganls ---
 
-
 # --- ENUMS ---
-
 
 # --- Constants ---
 const PROJECTILE_OUTLINE_POINTS = 18
 
 # --- Exported Variables ---
 
-
 # --- Public Variables ---
 var projectile_outline: PoolVector2Array = []
 
 # --- Private Variables ---
-
 
 # --- Onready Variables ---
 
@@ -29,14 +24,12 @@ var projectile_outline: PoolVector2Array = []
 func _init() -> void:
 	_set_projectile_outline()
 
-# --- Virtual _ready method ---
 
+# --- Virtual _ready method ---
 
 # --- Virtual methods ---
 
-
 # --- Public methods ---
-
 
 # --- Private methods ---
 
