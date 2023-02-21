@@ -4,6 +4,7 @@ export(PackedScene) var enemy
 
 onready var entity_spawn_point = $EntityPath/EntitySpawnPoint
 
+
 func _ready() -> void:
 	EventBus.connect("game_over", self, "_on_game_over")
 
@@ -23,4 +24,9 @@ func _on_AsteroidTimer_timeout() -> void:
 	var a = Asteroid.new()
 	entity_spawn_point.offset = randi()
 	a.position = entity_spawn_point.position
+	a.fling_at(Vector2.ZERO)
 	$EntityContainer.add_child(a)
+
+
+func free_explosions():
+	Sparks.garbage_collect(get_tree())

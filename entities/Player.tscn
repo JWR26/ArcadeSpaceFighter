@@ -1,7 +1,6 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=19 format=2]
 
-[ext_resource path="res://entities/player.gd" type="Script" id=1]
-[ext_resource path="res://entities/projectile.tscn" type="PackedScene" id=2]
+[ext_resource path="res://entities/ship_player.gd" type="Script" id=1]
 [ext_resource path="res://entities/camera.gd" type="Script" id=3]
 [ext_resource path="res://entities/hud.gd" type="Script" id=4]
 [ext_resource path="res://entities/Laser.tscn" type="PackedScene" id=5]
@@ -88,7 +87,7 @@ physics_material_override = SubResource( 11 )
 contacts_reported = 1
 contact_monitor = true
 script = ExtResource( 1 )
-projectile = ExtResource( 2 )
+projectile_radius = 6
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
 polygon = PoolVector2Array( -8, -48, 8, -48, 16, -8, 56, 8, 56, 16, 32, 24, 24, 24, 24, 32, -24, 32, -24, 24, -32, 24, -56, 16, -56, 8, -16, -8 )
@@ -100,24 +99,26 @@ scale = Vector2( 0.75, 1.5 )
 color = Color( 0, 0.2, 1, 1 )
 polygon = PoolVector2Array( -53.3333, -5.33333, -53.3333, 10.6667, -42.6667, 10.6667, -42.6667, -5.33333 )
 
+[node name="Wing" type="Polygon2D" parent="Ship/Cannon"]
+scale = Vector2( 1.33333, 0.666667 )
+color = Color( 0.160784, 0.678431, 1, 1 )
+polygon = PoolVector2Array( -8, -16, -8, 24, -32, 24, -56, 16, -56, 8 )
+
+[node name="Stripe" type="Polygon2D" parent="Ship/Cannon/Wing"]
+color = Color( 0, 0.2, 1, 1 )
+polygon = PoolVector2Array( -16, 0, -16, 16, -40, 16, -40, 8 )
+
 [node name="Cannon2" type="Polygon2D" parent="Ship"]
 scale = Vector2( 0.75, 1.5 )
 color = Color( 0, 0.2, 1, 1 )
 polygon = PoolVector2Array( 42.6667, -5.33333, 42.6667, 2.96956, 42.6667, 10.6667, 53.3333, 10.6667, 53.3333, -5.33333 )
 
-[node name="Wing" type="Polygon2D" parent="Ship"]
-color = Color( 0.160784, 0.678431, 1, 1 )
-polygon = PoolVector2Array( -8, -16, -8, 24, -32, 24, -56, 16, -56, 8 )
-
-[node name="Stripe" type="Polygon2D" parent="Ship/Wing"]
-color = Color( 0, 0.2, 1, 1 )
-polygon = PoolVector2Array( -16, 0, -16, 16, -40, 16, -40, 8 )
-
-[node name="Wing2" type="Polygon2D" parent="Ship"]
+[node name="Wing2" type="Polygon2D" parent="Ship/Cannon2"]
+scale = Vector2( 1.33333, 0.666667 )
 color = Color( 0.160784, 0.678431, 1, 1 )
 polygon = PoolVector2Array( 8, -16, 8, 24, 32, 24, 56, 16, 56, 8 )
 
-[node name="Stripe2" type="Polygon2D" parent="Ship/Wing2"]
+[node name="Stripe2" type="Polygon2D" parent="Ship/Cannon2/Wing2"]
 color = Color( 0, 0.2, 1, 1 )
 polygon = PoolVector2Array( 16, 0, 16, 16, 40, 16, 40, 8 )
 
@@ -125,11 +126,11 @@ polygon = PoolVector2Array( 16, 0, 16, 16, 40, 16, 40, 8 )
 color = Color( 1, 0.517647, 0.14902, 1 )
 polygon = PoolVector2Array( -8, 0, -16, 48, 0, 56, 16, 48, 8, 0 )
 
-[node name="Body" type="Polygon2D" parent="Ship"]
+[node name="Body" type="Polygon2D" parent="Ship/Flame"]
 color = Color( 0, 0.2, 1, 1 )
 polygon = PoolVector2Array( -8, -48, 8, -48, 24, 24, 24, 32, -24, 32, -24, 24 )
 
-[node name="Cockpit" type="Polygon2D" parent="Ship"]
+[node name="Cockpit" type="Polygon2D" parent="Ship/Flame"]
 color = Color( 0, 1, 0.8, 1 )
 polygon = PoolVector2Array( -8, 0, -16, 24, -8, 16, 8, 16, 16, 24, 8, 0, 0, -8 )
 

@@ -2,7 +2,7 @@
 
 [ext_resource path="res://entities/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://game/powerup_manager.gd" type="Script" id=2]
-[ext_resource path="res://entities/Enemy.tscn" type="PackedScene" id=4]
+[ext_resource path="res://entities/UFO.tscn" type="PackedScene" id=4]
 [ext_resource path="res://entities/Boundary.tscn" type="PackedScene" id=5]
 [ext_resource path="res://entities/Health.tscn" type="PackedScene" id=6]
 [ext_resource path="res://game/game.gd" type="Script" id=7]
@@ -45,15 +45,8 @@ curve = SubResource( 2 )
 [node name="EntitySpawnPoint" type="PathFollow2D" parent="EntityPath"]
 position = Vector2( -1216, -768 )
 
-[node name="UFOTimer" type="Timer" parent="."]
-wait_time = 8.0
+[node name="GarbageCollector" type="Timer" parent="."]
 autostart = true
-
-[node name="AsteroidTimer" type="Timer" parent="."]
-wait_time = 3.0
-autostart = true
-
-[node name="Boundary" parent="." instance=ExtResource( 5 )]
 
 [node name="PowerupManager" type="Node" parent="."]
 script = ExtResource( 2 )
@@ -65,9 +58,26 @@ laser = ExtResource( 9 )
 wait_time = 10.0
 autostart = true
 
-[node name="LaserPowerup" parent="." instance=ExtResource( 9 )]
-position = Vector2( -67, -81 )
+[node name="Health" parent="PowerupManager" instance=ExtResource( 6 )]
+position = Vector2( -484, -206 )
 
+[node name="BouncingBullletPowerup" parent="PowerupManager" instance=ExtResource( 8 )]
+position = Vector2( -595, -267 )
+
+[node name="UFOTimer" type="Timer" parent="."]
+wait_time = 8.0
+autostart = true
+
+[node name="UFO" parent="UFOTimer" instance=ExtResource( 4 )]
+position = Vector2( -694, -342 )
+
+[node name="AsteroidTimer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[node name="Boundary" parent="." instance=ExtResource( 5 )]
+
+[connection signal="timeout" from="GarbageCollector" to="." method="free_explosions"]
+[connection signal="timeout" from="PowerupManager/Timer" to="PowerupManager" method="_on_Timer_timeout"]
 [connection signal="timeout" from="UFOTimer" to="." method="_on_UFOTimer_timeout"]
 [connection signal="timeout" from="AsteroidTimer" to="." method="_on_AsteroidTimer_timeout"]
-[connection signal="timeout" from="PowerupManager/Timer" to="PowerupManager" method="_on_Timer_timeout"]

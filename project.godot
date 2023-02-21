@@ -9,28 +9,55 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Entity2D",
+"class": "Asteroid",
+"language": "GDScript",
+"path": "res://entities/entity_asteroid.gd"
+}, {
+"base": "RigidBody2D",
+"class": "Entity2D",
+"language": "GDScript",
+"path": "res://entities/entity2d.gd"
+}, {
 "base": "HBoxContainer",
 "class": "HighScoreLabel",
 "language": "GDScript",
 "path": "res://menu/high_score_label.gd"
 }, {
-"base": "RigidBody2D",
-"class": "Asteroid",
+"base": "Ship2D",
+"class": "Player2D",
 "language": "GDScript",
-"path": "res://entities/asteroid.gd"
+"path": "res://entities/ship_player.gd"
 }, {
 "base": "RigidBody2D",
 "class": "Projectile2D",
 "language": "GDScript",
-"path": "res://entities/projectile.gd"
+"path": "res://entities/projectile2d.gd"
+}, {
+"base": "Entity2D",
+"class": "Ship2D",
+"language": "GDScript",
+"path": "res://entities/entity_ship.gd"
+}, {
+"base": "Ship2D",
+"class": "UFO",
+"language": "GDScript",
+"path": "res://entities/ship_ufo.gd"
+}, {
+"base": "Reference",
+"class": "Sparks",
+"language": "GDScript",
+"path": "res://effects/sparks.gd"
 } ]
 _global_script_class_icons={
-
 "Asteroid": "",
-
+"Entity2D": "",
 "HighScoreLabel": "",
-
-"Projectile2D": ""
+"Player2D": "",
+"Projectile2D": "",
+"Ship2D": "",
+"Sparks": "",
+"UFO": ""
 }
 
 [application]
@@ -45,6 +72,7 @@ EventBus="*res://autoload/event_bus.gd"
 MusicManager="*res://autoload/music_manager.tscn"
 SceneChanger="*res://autoload/scene_changer.tscn"
 HighScoreManager="*res://autoload/high_score_manager.gd"
+Globals="*res://autoload/globals.gd"
 
 [debug]
 
@@ -101,8 +129,18 @@ fire_laser={
 }
 stop={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":87,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
-, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":5,"pressure":0.0,"pressed":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777238,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":8,"pressure":0.0,"pressed":false,"script":null)
+ ]
+}
+strafe_left={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":4,"pressure":0.0,"pressed":false,"script":null)
+ ]
+}
+strafe_right={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":5,"pressure":0.0,"pressed":false,"script":null)
  ]
 }
 
