@@ -1,6 +1,7 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://entities/ship_player.gd" type="Script" id=1]
+[ext_resource path="res://entities/background.gd" type="Script" id=2]
 [ext_resource path="res://entities/camera.gd" type="Script" id=3]
 [ext_resource path="res://entities/hud.gd" type="Script" id=4]
 [ext_resource path="res://entities/Laser.tscn" type="PackedScene" id=5]
@@ -271,6 +272,9 @@ value = 10.0
 percent_visible = false
 
 [node name="Tween" type="Tween" parent="Camera/Camera2D/CanvasLayer/HUD/MC/VBC/HealthBar"]
+
+[node name="Background" type="Node" parent="."]
+script = ExtResource( 2 )
 
 [connection signal="body_entered" from="." to="." method="_on_Player_body_entered"]
 [connection signal="timeout" from="LaserTimer" to="." method="_on_LaserTimer_timeout"]

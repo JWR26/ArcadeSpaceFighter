@@ -23,7 +23,7 @@ const BOUNCING_BULLET_TIME: float = 8.0
 # --- Private Variables ---
 var laser_available: bool = false setget set_laser_available
 var laser_active: bool = false
-
+var _background: Node
 # --- Onready Variables ---
 
 # --- Virtual _init method ---
@@ -90,6 +90,9 @@ func _physics_process(delta: float) -> void:
 	$Camera/Camera2D/CanvasLayer/HUD.update_bouncing_bullet_timer($BouncingBulletTimer.time_left)
 	if !$LaserTimer.is_stopped():
 		$Camera/Camera2D/CanvasLayer/HUD.update_laser_timer($LaserTimer.time_left)
+	
+	# udpate the background - a factor of 3 on the normalsed linear velocity gives a good impression of speed.
+	$Background.update_star_positions(-linear_velocity.normalized() * 3)
 
 
 # --- Public methods ---

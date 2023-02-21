@@ -24,8 +24,10 @@ func _on_AsteroidTimer_timeout() -> void:
 	var a = Asteroid.new()
 	entity_spawn_point.offset = randi()
 	a.position = entity_spawn_point.position
-	a.fling_at(Vector2.ZERO)
+	# flinging the asteroid before it is in the scenetree raises an error, we should fling it after adding to the scene tree.
+	# a.fling_at(Vector2.ZERO)
 	$EntityContainer.add_child(a)
+	a.fling_at(Vector2.ZERO)
 
 
 func free_explosions():

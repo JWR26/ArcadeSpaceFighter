@@ -8,10 +8,14 @@ const HALF_Y: float = 540.00
 const MAX_X: float = 1920.00
 const MAX_Y: float = 1080.00
 
-func _init(type: int) -> void:
+func _init(type: int = 5) -> void:
 	randomize()
 	var number_of_stars = randi() % 50 + 50
 	var star_positions: PoolVector2Array = []
+	# this is temporary as the constructor only needs to exist for the tests.
+	if type == 5:
+		type = randi() % 3
+	
 	match type:
 		1:
 			star_positions = _grid_scatter(number_of_stars)
@@ -20,6 +24,7 @@ func _init(type: int) -> void:
 		_:
 			star_positions = _random_scatter(number_of_stars)
 	_add_stars(star_positions)
+
 
 
 func update_star_positions(delta: Vector2 = Vector2.ZERO) -> void:
@@ -71,8 +76,6 @@ func _halton_scatter(n: int) -> PoolVector2Array:
 	
 	var a: int = prime_a[index]
 	var b: int = prime_b[index]
-	
-	print(a, b)
 	
 	for stars in range(n):
 		var pos: Vector2 = Vector2(_halton(stars, a) * MAX_X, _halton(stars, b) * MAX_Y)
