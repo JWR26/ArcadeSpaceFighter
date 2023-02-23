@@ -90,6 +90,9 @@ func _physics_process(delta: float) -> void:
 	$Camera/Camera2D/CanvasLayer/HUD.update_bouncing_bullet_timer($BouncingBulletTimer.time_left)
 	if !$LaserTimer.is_stopped():
 		$Camera/Camera2D/CanvasLayer/HUD.update_laser_timer($LaserTimer.time_left)
+	
+	# udpate the background - a factor of 3 on the normalsed linear velocity gives a good impression of speed.
+	$Background.update_star_positions(-linear_velocity.normalized() * 2)
 
 
 # --- Public methods ---
