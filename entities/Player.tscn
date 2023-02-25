@@ -272,6 +272,5 @@ percent_visible = false
 
 [node name="Tween" type="Tween" parent="Camera/Camera2D/CanvasLayer/HUD/MC/VBC/HealthBar"]
 
-[connection signal="body_entered" from="." to="." method="_on_Player_body_entered"]
 [connection signal="timeout" from="LaserTimer" to="." method="_on_LaserTimer_timeout"]
 [connection signal="timeout" from="BouncingBulletTimer" to="." method="_on_BouncingBulletTimer_timeout"]

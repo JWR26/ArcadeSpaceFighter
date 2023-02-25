@@ -19,6 +19,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://entities/entity2d.gd"
 }, {
+"base": "Area2D",
+"class": "GravityZone2D",
+"language": "GDScript",
+"path": "res://entities/gravity_zone.gd"
+}, {
 "base": "HBoxContainer",
 "class": "HighScoreLabel",
 "language": "GDScript",
@@ -39,19 +44,20 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://entities/entity_ship.gd"
 }, {
-"base": "Ship2D",
-"class": "UFO",
-"language": "GDScript",
-"path": "res://entities/ship_ufo.gd"
-}, {
 "base": "Reference",
 "class": "Sparks",
 "language": "GDScript",
 "path": "res://effects/sparks.gd"
+}, {
+"base": "Ship2D",
+"class": "UFO",
+"language": "GDScript",
+"path": "res://entities/ship_ufo.gd"
 } ]
 _global_script_class_icons={
 "Asteroid": "",
 "Entity2D": "",
+"GravityZone2D": "",
 "HighScoreLabel": "",
 "Player2D": "",
 "Projectile2D": "",

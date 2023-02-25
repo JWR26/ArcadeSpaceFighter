@@ -128,9 +128,10 @@ func _shoot() -> void:
 	$CannonTimer.start(shoot_cooldown)
 
 
-func _on_Player_body_entered(body: Node) -> void:
+func _on_body_entered(body: Node) -> void:
+	# allow the player to hit walls without concequence
 	if body.is_in_group("enemy"):
-		take_damage(1)
+		._on_body_entered(body)
 
 
 func _on_BouncingBulletTimer_timeout() -> void:

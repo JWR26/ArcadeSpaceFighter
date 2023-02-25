@@ -22,7 +22,7 @@ func asteroid_position(index):
 
 
 func create_asteroid(index):
-	var asteroid = Asteroid.new()
+	var asteroid = Asteroid.new(false)
 	asteroid.set_position(asteroid_position(index))
 	add_child(asteroid)
 

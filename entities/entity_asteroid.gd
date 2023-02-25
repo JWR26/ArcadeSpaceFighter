@@ -31,6 +31,11 @@ const RADIUS_LIMIT = MIN_RADIUS + RADIUS_RANGE + MIN_NOISE + NOISE_RANGE
 # Maximum possible size if we happen to generate a perfect circle
 const SIZE_LIMIT = PI * pow(RADIUS_LIMIT, 2)
 
+const GRAVITY_ZONE_RADIUS: int = 500
+
+# colours for asteroids
+var normal_colour: Color = Color("#c2c3c7")
+var gravity_colour: Color = Color("#ab5236")
 # --- Exported Variables ---
 
 # --- Public Variables ---
@@ -43,15 +48,19 @@ var _sparks = preload("res://effects/asteroid_sparks.tscn")
 # --- Constructor ---
 
 
-func _init() -> void:
+func _init(has_gravity: bool) -> void:
 	init_material()
 	contact_monitor = true
 	contacts_reported = 5
 
 	var outline = create_outline()
 	set_collision_shape(outline)
-	set_drawn_shape(outline)
-	compute_mass(outline)
+	set_drawn_shape(outline, has_gravity)
+	compute_mass(outline, has_gravity)
+	
+	if has_gravity:
+		add_gravity_zone()
+		hp *= 5
 
 
 # --- Ready Function ---
@@ -129,22 +138,28 @@ func set_collision_shape(outline: PoolVector2Array) -> void:
 
 
 # Set the visible shape of a new asteroid
-func set_drawn_shape(outline: PoolVector2Array) -> void:
+func set_drawn_shape(outline: PoolVector2Array, has_gravity: bool) -> void:
 	var polygon = Polygon2D.new()
 	polygon.set_polygon(outline)
-	polygon.set_color(Color(0.372549, 0.341176, 0.309804, 1))
+	var color: Color = gravity_colour if has_gravity else normal_colour	
+	polygon.set_color(color)
 	add_child(polygon)
 
 
-func compute_mass(outline: PoolVector2Array) -> void:
+func compute_mass(outline: PoolVector2Array, has_gravity: bool) -> void:
 	var area: float = 0
 	var n = len(outline)
 	for i in n:
 		area += outline[i].x * outline[(i + 1) % n].y
 		area -= outline[i].y * outline[(i + 1) % n].x
 	area = abs(area) / 2
+	var factor = 10 if has_gravity else 1
+	set_mass(MASS_LIMIT * (area / SIZE_LIMIT) * factor)
 
-	set_mass(MASS_LIMIT * (area / SIZE_LIMIT))
+
+func add_gravity_zone() -> void:
+	var zone = GravityZone2D.new(GRAVITY_ZONE_RADIUS)
+	add_child(zone)
 
 
 func entity_destroyed() -> void:

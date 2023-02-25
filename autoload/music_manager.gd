@@ -2,15 +2,15 @@ extends Node
 
 var current_track: AudioStreamPlayer
 
-
-func _ready() -> void:
-	current_track = get_node("Title")
-	$Tween.interpolate_property(
-		current_track, "volume_db", -80, 0.0, 5.0, Tween.TRANS_CUBIC, Tween.EASE_OUT, 0.0
-	)
-	$Tween.start()
-	yield($Tween, "tween_started")
-	current_track.play()
+# Commented out as the track is starting to annoy me...
+#func _ready() -> void:
+#	current_track = get_node("Title")
+#	$Tween.interpolate_property(
+#		current_track, "volume_db", -80, 0.0, 5.0, Tween.TRANS_CUBIC, Tween.EASE_OUT, 0.0
+#	)
+#	$Tween.start()
+#	yield($Tween, "tween_started")
+#	current_track.play()
 
 
 func _change_track_to(

@@ -12,7 +12,7 @@ extends RigidBody2D
 const IMPULSE_FACTOR = 1000
 const MAX_RADIUS = 12
 const POINTS = 18
-const PROJECTILE_MASS = 0.1
+const PROJECTILE_MASS = 0.05
 const NUMBER_OF_CONTACTS = 1
 const SPARKS = preload("res://effects/bullet_sparks.tscn")
 # --- Exported Variables ---
@@ -20,7 +20,7 @@ const SPARKS = preload("res://effects/bullet_sparks.tscn")
 # --- Public Variables ---
 
 # --- Private Variables ---
-var direction = Vector2.UP setget set_direction
+var direction = Vector2.ZERO setget set_direction
 var can_bounce: bool = false setget set_can_bounce
 var bounce_number: int = 0
 

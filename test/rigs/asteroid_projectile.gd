@@ -18,7 +18,7 @@ func _ready():
 func create_asteroid():
 	free_entity(asteroid)
 
-	asteroid = Asteroid.new()
+	asteroid = Asteroid.new(false)
 	asteroid.set_position(ASTEROID_POS)
 	$entity_container.add_child(asteroid)
 
